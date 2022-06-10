@@ -22,6 +22,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var MatchingCardGame = /*#__PURE__*/function (_Game) {
   _inherits(MatchingCardGame, _Game);
 
@@ -34,57 +36,92 @@ var MatchingCardGame = /*#__PURE__*/function (_Game) {
 
     _this = _super.call(this, selector);
 
+    _defineProperty(_assertThisInitialized(_this), "setup", function () {
+      var btn = _this.gameEl.querySelector('.start');
+
+      btn.addEventListener('click', _this.startGame);
+      _this.cardsChosen = [];
+      _this.cardsChosenId = []; // this.gameArea.addEventListener('click' , function(evt){
+      //     // console.log('game-area clicked')
+      //     // console.log('target', evt.target)
+      //     //console.log('current target', evt.currentTarget)  
+      //     const tgt = evt.target
+      //     const slotId = tgt.parentElement.dataset.slot
+      //     console.log('slot id', slotId)
+      // })
+
+      _this.gameArea.addEventListener('click', _this.flipCard);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "startGame", function () {
+      var deck = new Deck();
+      _this.grid = document.querySelector('.game-area');
+      console.log(deck.cards);
+      _this.cardArray = [];
+
+      for (var i = 0; i < MatchingCardGame.GAME_BOARD_SIZE; i++) {
+        var card = deck.getNextCard();
+        var cardData = document.createElement('div');
+        cardData.setAttribute("data-slot", i);
+        cardData.append(card.getCardElement());
+
+        _this.cardArray.push(card);
+
+        _this.grid.append(cardData);
+      }
+
+      console.log(_this.cardArray);
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "flipCard", function (evt) {
+      var tgt = evt.target;
+      var slotId = parseInt(tgt.parentElement.dataset.slot);
+      console.log('slot id', slotId);
+      var cardId = tgt.dataset.value; // const cardLoc = tgt.getAttribute('data-slot')
+
+      console.log(cardId);
+      var card = _this.cardArray[slotId]; // console.log(cardLoc)
+
+      var cardEvent = new CustomEvent('flip'); //toggle class on the dom to show flipped
+
+      var cardDiv = _this.grid.querySelector("[data-slot=\"".concat(slotId, "\"]"));
+
+      cardDiv.dispatchEvent(cardEvent); // this.cardArray
+
+      _this.cardsChosen.push(slotId); // cardsChosenId.push(cardId)
+
+
+      if (_this.cardsChosen.length === 2) {
+        _this.checkMatch();
+      } //if match = empty div slots add new 
+      //if not then flip back over
+
+    });
+
     _this.setup();
 
     return _this;
   }
 
   _createClass(MatchingCardGame, [{
-    key: "setup",
-    value: function setup() {
-      var btn = this.gameEl.querySelector('.start');
-      btn.addEventListener('click', this.startGame);
-      var cardsChosen = [];
-      var cardsChosenId = [];
-    } //run create deck function 12 times but from the same array.
-
-  }, {
-    key: "startGame",
-    value: function startGame() {
-      for (var i = 0; i <= 11; i++) {
-        var _deck = new Deck();
-
-        var card = new Card();
-        console.log(_deck.cards);
-
-        var createDeck = _deck.cards[0].getCard();
-
-        var grid = document.querySelector('.game-area');
-        grid.append(createDeck);
-      }
-    } //add custom event that checks if card has been flipped over
-
-  }, {
-    key: "flipCard",
-    value: function flipCard() {
-      var cardId = this.getAttribute('data-value');
-      cardsChosen.push(deck.cards[cardId].value);
-      cardsChosenId.push(cardId);
-
-      if (cardsChosen.length === 2) {
-        this.checkMatch();
-      }
-    } //add function that checks if face card / # matches
-
-  }, {
     key: "checkMatch",
-    value: function checkMatch() {
-      var cardOne = cardsChosenId[0];
-      var cardTwo = cardsChosenId[1];
+    value: //add function that checks if face card / # matches
+    //slot ids
+    function checkMatch() {
+      var slotOne = this.cardsChosen[0];
+      var slotTwo = this.cardsChosen[1];
+      var cardOne = this.cardArray[slotOne];
+      var cardTwo = this.cardArray[slotTwo];
+      console.log(cardOne);
+      console.log(cardTwo);
 
-      if (cardOne[0] === cardTwo[1]) {
+      if (cardOne.value === cardTwo.value) {
         alert('you got a match');
-      }
+      } else {
+        alert('no match');
+      } //reset cards chosen
+      //refresh()
+
     } //add function that updates the score and cards remaing in the scoreboard
 
   }, {
@@ -98,4 +135,6 @@ var MatchingCardGame = /*#__PURE__*/function (_Game) {
 
   return MatchingCardGame;
 }(Game);
+
+_defineProperty(MatchingCardGame, "GAME_BOARD_SIZE", 12);
 //# sourceMappingURL=matchCard.js.map

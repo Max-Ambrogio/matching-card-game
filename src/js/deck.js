@@ -2,19 +2,33 @@ class Deck{
     constructor(cards = this.newDeck()){
         this.cards = cards
         this.shuffle()
+        this.drawnCount = 0
     }
     
     //flattens suit and value array into 52 card deck
     newDeck(){
-        const card = new Card()
+        // const card = new Card()
         // console.log(card.SUITS)
         // console.log(card.VALUES)
-        return card.SUITS.flatMap(suit => {
-            return card.VALUES.map(value => {
+        return Card.SUITS.flatMap(suit => {
+            return Card.VALUES.map(value => {
                 return new Card(suit, value)
             })
         })
     }
+
+    getNextCard(){
+      const card = this.cards[this.drawnCount]
+      card.drawn = true
+      this.drawnCount++
+      return card
+    }
+
+    getCard(){
+        //
+    }
+
+    //specify static elements
 
     //locates starting position in array, randomizes arrays position
     shuffle(){

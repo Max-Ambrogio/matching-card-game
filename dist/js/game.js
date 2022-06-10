@@ -12,5 +12,6 @@ var Game = /*#__PURE__*/_createClass(function Game(selector) {
   this.gameEl = document.querySelector(selector);
   this.gameBoardEl = this.gameEl.querySelector("#gameboard");
   this.scoreBoardEl = this.gameEl.querySelector("#scoreboard");
+  this.gameArea = this.gameEl.querySelector('.game-area');
 });
 //# sourceMappingURL=game.js.map

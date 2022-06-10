@@ -1,6 +1,6 @@
 class Card{   
-    SUITS = ["♦" , "♥" , "♣" , "♠"]
-    VALUES = [
+    static SUITS = ["♦" , "♥" , "♣" , "♠"]
+    static VALUES = [
         "A", 
         "2", 
         "3", 
@@ -18,7 +18,20 @@ class Card{
     constructor(suit, value){
         this.suit = suit
         this.value = value
-        this.getCard()
+        this.drawn = false
+       
+        // this.getCardElement()
+    }
+    //this.element = getCardElement pre generate all cards 
+
+    // setup(){
+    //     this.addEventListener('flip' , this.toggleFlip)
+    // }
+
+    toggleFlip(){
+        //adding or removing of css class
+        //only flip if not flipped or make the game do it
+        this.flip = true
     }
 
     // if club or spade color = black, anything else color = red
@@ -27,11 +40,13 @@ class Card{
     }
 
     //creates card div and uses dataset to find the card value and suit
-    getCard = () => {
+    getCardElement = () => {
         const cardDiv = document.createElement('div')
         cardDiv.innerText = this.suit
         cardDiv.classList.add('card' , this.color)
         cardDiv.dataset.value = `${this.value} ${this.suit}`
+        this.drawn = true
+        cardDiv.addEventListener('flip' , this.toggleFlip)
         return cardDiv
     }
 }

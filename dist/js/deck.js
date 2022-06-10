@@ -14,21 +14,35 @@ var Deck = /*#__PURE__*/function () {
 
     this.cards = cards;
     this.shuffle();
+    this.drawnCount = 0;
   } //flattens suit and value array into 52 card deck
 
 
   _createClass(Deck, [{
     key: "newDeck",
     value: function newDeck() {
-      var card = new Card(); // console.log(card.SUITS)
+      // const card = new Card()
+      // console.log(card.SUITS)
       // console.log(card.VALUES)
-
-      return card.SUITS.flatMap(function (suit) {
-        return card.VALUES.map(function (value) {
+      return Card.SUITS.flatMap(function (suit) {
+        return Card.VALUES.map(function (value) {
           return new Card(suit, value);
         });
       });
-    } //locates starting position in array, randomizes arrays position
+    }
+  }, {
+    key: "getNextCard",
+    value: function getNextCard() {
+      var card = this.cards[this.drawnCount];
+      card.drawn = true;
+      this.drawnCount++;
+      return card;
+    }
+  }, {
+    key: "getCard",
+    value: function getCard() {//
+    } //specify static elements
+    //locates starting position in array, randomizes arrays position
 
   }, {
     key: "shuffle",

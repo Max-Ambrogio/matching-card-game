@@ -14,25 +14,34 @@ var Card = /*#__PURE__*/function () {
 
     _classCallCheck(this, Card);
 
-    _defineProperty(this, "SUITS", ["♦", "♥", "♣", "♠"]);
-
-    _defineProperty(this, "VALUES", ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K", "Q"]);
-
-    _defineProperty(this, "getCard", function () {
+    _defineProperty(this, "getCardElement", function () {
       var cardDiv = document.createElement('div');
       cardDiv.innerText = _this.suit;
       cardDiv.classList.add('card', _this.color);
       cardDiv.dataset.value = "".concat(_this.value, " ").concat(_this.suit);
+      _this.drawn = true;
+      cardDiv.addEventListener('flip', _this.toggleFlip);
       return cardDiv;
     });
 
     this.suit = suit;
     this.value = value;
-    this.getCard();
-  } // if club or spade color = black, anything else color = red
+    this.drawn = false; // this.getCardElement()
+  } //this.element = getCardElement pre generate all cards 
+  // setup(){
+  //     this.addEventListener('flip' , this.toggleFlip)
+  // }
 
 
   _createClass(Card, [{
+    key: "toggleFlip",
+    value: function toggleFlip() {
+      //adding or removing of css class
+      //only flip if not flipped or make the game do it
+      this.flip = true;
+    } // if club or spade color = black, anything else color = red
+
+  }, {
     key: "color",
     get: function get() {
       return this.suit === "♣" || this.suit === "♠" ? 'black' : 'red';
@@ -42,4 +51,8 @@ var Card = /*#__PURE__*/function () {
 
   return Card;
 }();
+
+_defineProperty(Card, "SUITS", ["♦", "♥", "♣", "♠"]);
+
+_defineProperty(Card, "VALUES", ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "K", "Q"]);
 //# sourceMappingURL=card.js.map
