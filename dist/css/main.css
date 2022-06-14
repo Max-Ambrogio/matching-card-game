@@ -192,6 +192,27 @@ body {
 	gap: 0.5rem;
 	justify-content: center;
 	padding-top: 1rem;
+	overflow: hidden;
+	-webkit-perspective: 800px;
+	        perspective: 800px;
+}
+#game #gameboard .remove {
+	transition: 0.2s ease-in-out;
+	-webkit-transform: translate(0px, 50px);
+	        transform: translate(0px, 50px);
+	opacity: 0;
+}
+#game #gameboard .hide {
+	transition: 1s ease-in-out;
+	-webkit-transform: translate(0px, -10px);
+	        transform: translate(0px, -10px);
+	opacity: 0;
+}
+#game #gameboard .show {
+	transition: 1s ease-in-out;
+	opacity: 1;
+	-webkit-transform: translate(0px, 0px);
+	        transform: translate(0px, 0px);
 }
 #game #gameboard .card {
 	height: 140px;
@@ -206,6 +227,16 @@ body {
 	position: relative;
 	cursor: pointer;
 	transition: 0.5s ease-in-out;
+	-webkit-transform-style: preserve-3d;
+	        transform-style: preserve-3d;
+	-webkit-transform: rotateY(180deg);
+	        transform: rotateY(180deg);
+	-webkit-backface-visibility: visible;
+	        backface-visibility: visible;
+}
+#game #gameboard .toggleCard {
+	-webkit-transform: rotateY(0deg);
+	        transform: rotateY(0deg);
 }
 #game #gameboard .red {
 	color: red;
@@ -234,5 +265,12 @@ body {
 	margin-top: 20px;
 	font-size: 1.2rem;
 	color: white;
+}
+#game .reset {
+	text-align: center;
+	display: none;
+}
+#game .display {
+	display: block;
 }
 /*# sourceMappingURL=main.css.map */

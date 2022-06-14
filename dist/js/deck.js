@@ -21,9 +21,6 @@ var Deck = /*#__PURE__*/function () {
   _createClass(Deck, [{
     key: "newDeck",
     value: function newDeck() {
-      // const card = new Card()
-      // console.log(card.SUITS)
-      // console.log(card.VALUES)
       return Card.SUITS.flatMap(function (suit) {
         return Card.VALUES.map(function (value) {
           return new Card(suit, value);
@@ -37,12 +34,7 @@ var Deck = /*#__PURE__*/function () {
       card.drawn = true;
       this.drawnCount++;
       return card;
-    }
-  }, {
-    key: "getCard",
-    value: function getCard() {//
-    } //specify static elements
-    //locates starting position in array, randomizes arrays position
+    } //locates starting position in array, randomizes arrays position
 
   }, {
     key: "shuffle",

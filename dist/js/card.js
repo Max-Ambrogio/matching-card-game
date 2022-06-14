@@ -18,6 +18,7 @@ var Card = /*#__PURE__*/function () {
       var cardDiv = document.createElement('div');
       cardDiv.innerText = _this.suit;
       cardDiv.classList.add('card', _this.color);
+      cardDiv.classList.add('front');
       cardDiv.dataset.value = "".concat(_this.value, " ").concat(_this.suit);
       _this.drawn = true;
       cardDiv.addEventListener('flip', _this.toggleFlip);
@@ -26,12 +27,8 @@ var Card = /*#__PURE__*/function () {
 
     this.suit = suit;
     this.value = value;
-    this.drawn = false; // this.getCardElement()
-  } //this.element = getCardElement pre generate all cards 
-  // setup(){
-  //     this.addEventListener('flip' , this.toggleFlip)
-  // }
-
+    this.drawn = false;
+  }
 
   _createClass(Card, [{
     key: "toggleFlip",

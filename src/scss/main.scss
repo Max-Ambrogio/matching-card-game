@@ -76,9 +76,26 @@ body {
 			gap: .5rem;
 			justify-content: center;
 			padding-top: 1rem;
+			overflow: hidden;
+			perspective: 800px;
 		}
-
-
+		.remove{
+			transition: .2s ease-in-out;
+			transform: translate(0px,50px);
+			opacity: 0;
+		}
+	
+		.hide{
+			transition: 1s ease-in-out;
+			transform: translate(0px,-10px);
+			opacity: 0;
+		}
+		.show{
+			transition: 1s ease-in-out;
+			opacity: 1;
+			transform: translate(0px,0px);
+		}
+		
 		.card{
 			height: 140px;
 			width: 100px;
@@ -92,6 +109,25 @@ body {
 			position: relative;
 			cursor: pointer;
 			transition: .5s ease-in-out;
+			transform-style: preserve-3d;
+			transform: rotateY(180deg);
+			backface-visibility: visible;
+	
+		}
+		// .front,
+		// .back{
+		// 	height: 140px;
+		// 	width: 100px;
+		// 	position: absolute;
+		// 	// z-index: -2;
+		// }
+		// .back{
+		// 	background: url(https://opengameart.org/sites/default/files/card%20back%20black.png);
+		// 	background-size: contain;
+		// 	backface-visibility: hidden;
+		// }
+		.toggleCard{
+			transform: rotateY(0deg);
 		}
 
 		// .card:hover{
@@ -129,6 +165,14 @@ body {
 		margin-top: 20px;
 		font-size: 1.2rem;
 		color: white;
+	}
+
+	.reset{
+		text-align: center;
+		display: none;
+	}
+	.display{
+		display: block;
 	}
 
 

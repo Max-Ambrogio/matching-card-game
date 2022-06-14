@@ -20,13 +20,7 @@ class Card{
         this.value = value
         this.drawn = false
        
-        // this.getCardElement()
     }
-    //this.element = getCardElement pre generate all cards 
-
-    // setup(){
-    //     this.addEventListener('flip' , this.toggleFlip)
-    // }
 
     toggleFlip(){
         //adding or removing of css class
@@ -44,6 +38,7 @@ class Card{
         const cardDiv = document.createElement('div')
         cardDiv.innerText = this.suit
         cardDiv.classList.add('card' , this.color)
+        cardDiv.classList.add('front')
         cardDiv.dataset.value = `${this.value} ${this.suit}`
         this.drawn = true
         cardDiv.addEventListener('flip' , this.toggleFlip)

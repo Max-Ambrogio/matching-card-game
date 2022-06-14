@@ -7,9 +7,6 @@ class Deck{
     
     //flattens suit and value array into 52 card deck
     newDeck(){
-        // const card = new Card()
-        // console.log(card.SUITS)
-        // console.log(card.VALUES)
         return Card.SUITS.flatMap(suit => {
             return Card.VALUES.map(value => {
                 return new Card(suit, value)
@@ -23,12 +20,6 @@ class Deck{
       this.drawnCount++
       return card
     }
-
-    getCard(){
-        //
-    }
-
-    //specify static elements
 
     //locates starting position in array, randomizes arrays position
     shuffle(){
